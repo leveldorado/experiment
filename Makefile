@@ -10,3 +10,17 @@ test:
 	docker run --name mongo-test -p 27017:27017 -d  mongo
 	go test ./...
 	docker rm -f mongo-test
+
+build:
+	cd api && go build
+	cd ports && go build
+
+docker-build:
+	docker build -t experiment-api -f api.dockerfile .
+	docker build -t experiment-ports -f ports.dockerfile .
+
+up:
+	docker-compose up -d
+
+down:
+	docker-compose down

@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: api.dockerfile
+    ports:
+      - "8000:8000"
+    command: --ports_service_address=ports:9000
+    depends_on:
+      - ports
+  ports:
+    build:
+      context: .
+      dockerfile: ports.dockerfile
+    command: --mongodb_url=mongodb://mongo:27017
+    depends_on:
+      - mongo
+  mongo:
+    image: "mongo"
