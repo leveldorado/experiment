@@ -21,8 +21,9 @@ type App struct {
 	cfg    Config
 }
 
-func (a *App) Shutdown() {
+func (a *App) Shutdown() error {
 	a.server.GracefulStop()
+	return nil
 }
 
 func (a *App) Run() error {
@@ -74,7 +75,7 @@ func getConfig() (Config, error) {
 	   to simplify config management - config  parameters are taken from command args
 	   usually using just command args is not a good option, since we might need a lot of config parameters and have ability to change them without app restart
 	*/
-	if _, err := flags.ParseArgs(&cfg, os.Args); err != nil {
+	if _, err := flags.ParseArgs(&cfg, os.Args[1:]); err != nil {
 		return Config{}, fmt.Errorf(`failed to parse args: [args: %v, err: %w]`, os.Args, err)
 	}
 	return cfg, nil

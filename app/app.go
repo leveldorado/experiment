@@ -10,7 +10,7 @@ import (
 type service interface {
 	Build() error
 	Run() error
-	Shutdown()
+	Shutdown() error
 }
 
 func MustRun(s service) {
@@ -24,5 +24,7 @@ func MustRun(s service) {
 		log.Fatal(err.Error())
 	}
 	<-stopChan
-	s.Shutdown()
+	if err := s.Shutdown(); err != nil {
+		log.Fatal(err.Error())
+	}
 }

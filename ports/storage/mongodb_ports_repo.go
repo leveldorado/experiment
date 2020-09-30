@@ -108,6 +108,7 @@ func (r *MongodbPortsRepo) List(ctx context.Context) (<-chan *portspb.Port, erro
 			select {
 			case <-ctx.Done():
 				close(portsChan)
+				return
 			case portsChan <- p.toPortPb():
 			}
 		}
