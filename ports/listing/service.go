@@ -11,6 +11,7 @@ import (
 )
 
 type portsRepo interface {
+	// Get expected to return err nil and port nil in  case of record not found
 	Get(ctx context.Context, id string) (*portspb.Port, error)
 	List(ctx context.Context) (<-chan *portspb.Port, error)
 }
