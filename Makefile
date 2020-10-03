@@ -1,7 +1,7 @@
 # generate - generate code from proto file
-# requirements protoc libprotoc 3.13.0 and installed protoc-gen-go
+# requirements protoc libprotoc 3.13.0 and installed protoc-gen-go and protoc-gen-grpc
 generate:
-	protoc --proto_path=protobuf --go_out=plugins=grpc:. protobuf/ports.proto
+	protoc --proto_path=protobuf --go_out=. --go-grpc_out=. protobuf/ports.proto
 
 test: export TEST_MONGODB_URL=mongodb://localhost:27017
 

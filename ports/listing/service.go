@@ -21,6 +21,7 @@ Service is responsible for busyness logic
 at the moment there is just simple call to repository, but it may be extended with some parameters validation, combining result from several repos e.t.c
 */
 type Service struct {
+	portspb.UnimplementedListingServiceServer
 	pr portsRepo
 }
 
